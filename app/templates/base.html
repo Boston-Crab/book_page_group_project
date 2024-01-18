@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% if title %}
+    <title>{{ title }} - Book Data-Base</title>
+    {% else %}
+    <title>Welcome to Book Data-Base</title>
+    {% endif %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <script>
+      // Search bar function:
+      function searchBooks() {
+        // Get the search query
+        var searchQuery = document.getElementById('searchInput').value.toLowerCase();
+  
+        // Get the flex container and its items
+        var flexContainer = document.getElementById('flexContainer');
+        var flexItems = flexContainer.getElementsByClassName('flex-item');
+  
+        // Iterate through the items and hide/show based on the search query
+        for (var i = 0; i < flexItems.length; i++) {
+          var itemText = flexItems[i].textContent.toLowerCase();
+  
+          if (itemText.includes(searchQuery)) {
+            flexItems[i].style.display = 'block';
+          } else {
+            flexItems[i].style.display = 'none';
+          }
+        }
+      }
+    </script>
+
+  </head>
+  <body>
+    <div>Books Data-Base: <a href="/index">Home</a> <a href="/books">Books</a> <a href="/authors">Authors</a></div>
+    <hr />
+    <!-- Search bar: -->
+    <div>
+      <input type="text" id="searchInput" placeholder="Search..." oninput="searchBooks()">
+    </div>
+    <!-- Content block -->
+    {% block content %}{% endblock %}
+    
+  </body>
+</html>
